@@ -1,12 +1,17 @@
 // ==UserScript==
 // @name         EV2 Link
-// @namespace    http://tampermonkey.net/
-// @version      0.3
-// @description  Shows a direct link to EV2 rollouts
+// @description  Adds EV2 links to a release page.
+// @version      0.4
+// @homepage     https://github.com/specialforest/tampermonkey-scripts
 // @author       Igor Shishkin (igshishk@microsoft.com)
-// @match        https://msazure.visualstudio.com/DefaultCollection/One/_releaseProgress*
-// @match        https://msazure.visualstudio.com/One/_releaseProgress*
+// @namespace    http://tampermonkey.net/
+// @match        https://*.visualstudio.com/DefaultCollection/*/_releaseProgress*
+// @match        https://*.visualstudio.com/*/_releaseProgress*
 // @grant        none
+// @icon         https://specialforest.github.io/tampermonkey-scripts/ev2-link.ico
+// @downloadURL  https://specialforest.github.io/tampermonkey-scripts/ev2-link.user.js
+// @updateURL    https://specialforest.github.io/tampermonkey-scripts/ev2-link.user.js
+// @supportURL   https://github.com/specialforest/tampermonkey-scripts/issues/new
 // 
 // ==/UserScript==
 
