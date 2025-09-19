@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name         EV2 Link
+// @name         EV2 Link (releases)
 // @description  Adds EV2 links to a release page.
-// @version      0.5
+// @version      0.6
 // @homepage     https://github.com/specialforest/tampermonkey-scripts
 // @author       Igor Shishkin (igshishk@microsoft.com)
 // @namespace    http://tampermonkey.net/
