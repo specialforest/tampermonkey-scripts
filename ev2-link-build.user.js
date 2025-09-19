@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         EV2 Link
 // @description  Adds EV2 links to a build page.
-// @version      0.2
+// @version      0.3
 // @homepage     https://github.com/specialforest/tampermonkey-scripts
 // @author       Igor Shishkin (igshishk@microsoft.com)
 // @namespace    http://tampermonkey.net/
@@ -42,9 +42,10 @@
     async function onReady() {
         debug('ready!');
 
+        const page = window.dataProviders.data['ms.vss-tfs-web.page-data'];
         const build = window.dataProviders.data['ms.vss-build-web.run-details-data-provider'];
 
-        const timeline = await (await fetch(`https://msazure.visualstudio.com/One/_apis/build/builds/${build.id}/timeline?api-version=7.1-preview.2`)).json();
+        const timeline = await (await fetch(`https://${window.location.hostname}${page.project.url}/_apis/build/builds/${build.id}/timeline?api-version=7.1-preview.2`)).json();
         const ev2Tasks = [
           "Ev2RARollout",
           "ExpressV2Internal"
