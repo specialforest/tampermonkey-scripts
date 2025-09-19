@@ -1,11 +1,12 @@
 // ==UserScript==
 // @name         EV2 Link
 // @description  Adds EV2 links to a build page.
-// @version      0.1
+// @version      0.2
 // @homepage     https://github.com/specialforest/tampermonkey-scripts
 // @author       Igor Shishkin (igshishk@microsoft.com)
 // @namespace    http://tampermonkey.net/
-// @match        https://*.visualstudio.com/One/_build/results*
+// @match        https://*.visualstudio.com/*/_build/results*
+// @match        https://dev.azure.com/*/_build/results*
 // @grant        none
 // @icon         https://specialforest.github.io/tampermonkey-scripts/ev2-link.ico
 // @downloadURL  https://specialforest.github.io/tampermonkey-scripts/ev2-link-build.user.js
