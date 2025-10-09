@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         EV2 Link
 // @description  Adds EV2 links to a build page.
-// @version      0.3
+// @version      0.4
 // @homepage     https://github.com/specialforest/tampermonkey-scripts
 // @author       Igor Shishkin (igshishk@microsoft.com)
 // @namespace    http://tampermonkey.net/
@@ -31,7 +31,7 @@
         console.error(`[ev2-link] ${msg}`, args);
     }
 
-    debug('started! waiting for jQuery to load...');
+    debug('started! waiting for dataProviders...');
     var intervalId = setInterval(function() {
         if (window.dataProviders !== undefined) {
             clearInterval(intervalId);
@@ -44,6 +44,23 @@
 
         const page = window.dataProviders.data['ms.vss-tfs-web.page-data'];
         const build = window.dataProviders.data['ms.vss-build-web.run-details-data-provider'];
+
+        const summaryDiv = document.querySelector('div.summary-view');
+        if (summaryDiv) {
+            const rows = []
+            for (const [key, value] of Object.entries(build.templateParameters)) {
+                rows.push(`<div class="flex-row summary-info flex-center"><span class="text-ellipsis">${key}: ${value}</span></div>`);
+            }
+
+            const runParameters = htmlToElement(`
+              <div class="flex-grow flex-column summary-column">
+                <div class="flex-row"><div class="secondary-text summary-line-non-link" id="__bolt-parameters-label">Parameters</div></div>
+                <div class="summary-line flex-column flex-grow">${rows.join('')}</div>
+              </div>
+            `);
+
+            summaryDiv.appendChild(runParameters);
+        }
 
         const timeline = await (await fetch(`https://${window.location.hostname}${page.project.url}/_apis/build/builds/${build.id}/timeline?api-version=7.1-preview.2`)).json();
         const ev2Tasks = [
