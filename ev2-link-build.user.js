@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         EV2 Link
 // @description  Adds EV2 links to a build page.
-// @version      0.6
+// @version      0.7
 // @homepage     https://github.com/specialforest/tampermonkey-scripts
 // @author       Igor Shishkin (igshishk@microsoft.com)
 // @namespace    http://tampermonkey.net/
@@ -58,9 +58,9 @@
             for (const [key, value] of Object.entries(build.templateParameters)) {
                 const row = htmlToElement(`<div class="flex-row summary-info flex-center"><span class="text-ellipsis"></span></div>`)
                 const text = row.querySelector('span.text-ellipsis');
-                const value = `${key}: ${value}`
-                text.textContent = value
-                text.title = value
+                const textContent = `${key}: ${value}`
+                text.textContent = textContent
+                text.title = textContent
                 summaryLine.appendChild(row)
             }
 
