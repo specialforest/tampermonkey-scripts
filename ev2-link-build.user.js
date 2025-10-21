@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         EV2 Link
 // @description  Adds EV2 links to a build page.
-// @version      0.4
+// @version      0.5
 // @homepage     https://github.com/specialforest/tampermonkey-scripts
 // @author       Igor Shishkin (igshishk@microsoft.com)
 // @namespace    http://tampermonkey.net/
@@ -52,10 +52,11 @@
                 rows.push(`<div class="flex-row summary-info flex-center"><span class="text-ellipsis">${key}: ${value}</span></div>`);
             }
 
+            const text = rows.join('')
             const runParameters = htmlToElement(`
               <div class="flex-grow flex-column summary-column">
                 <div class="flex-row"><div class="secondary-text summary-line-non-link" id="__bolt-parameters-label">Parameters</div></div>
-                <div class="summary-line flex-column flex-grow">${rows.join('')}</div>
+                <div class="summary-line flex-column flex-grow" title="${text}">${text}</div>
               </div>
             `);
 
