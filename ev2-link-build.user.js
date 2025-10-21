@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         EV2 Link
 // @description  Adds EV2 links to a build page.
-// @version      0.5
+// @version      0.6
 // @homepage     https://github.com/specialforest/tampermonkey-scripts
 // @author       Igor Shishkin (igshishk@microsoft.com)
 // @namespace    http://tampermonkey.net/
@@ -47,18 +47,22 @@
 
         const summaryDiv = document.querySelector('div.summary-view');
         if (summaryDiv) {
-            const rows = []
-            for (const [key, value] of Object.entries(build.templateParameters)) {
-                rows.push(`<div class="flex-row summary-info flex-center"><span class="text-ellipsis">${key}: ${value}</span></div>`);
-            }
-
-            const text = rows.join('')
             const runParameters = htmlToElement(`
               <div class="flex-grow flex-column summary-column">
                 <div class="flex-row"><div class="secondary-text summary-line-non-link" id="__bolt-parameters-label">Parameters</div></div>
-                <div class="summary-line flex-column flex-grow" title="${text}">${text}</div>
+                <div class="summary-line flex-column flex-grow"></div>
               </div>
-            `);
+            `)
+            
+            const summaryLine = runParameters.querySelector('div.summary-line');
+            for (const [key, value] of Object.entries(build.templateParameters)) {
+                const row = htmlToElement(`<div class="flex-row summary-info flex-center"><span class="text-ellipsis"></span></div>`)
+                const text = row.querySelector('span.text-ellipsis');
+                const value = `${key}: ${value}`
+                text.textContent = value
+                text.title = value
+                summaryLine.appendChild(row)
+            }
 
             summaryDiv.appendChild(runParameters);
         }
