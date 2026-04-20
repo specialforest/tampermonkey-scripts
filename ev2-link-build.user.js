@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         EV2 Link
 // @description  Adds EV2 links to a build page.
-// @version      0.7
+// @version      0.8
 // @homepage     https://github.com/specialforest/tampermonkey-scripts
 // @author       Igor Shishkin (igshishk@microsoft.com)
 // @namespace    http://tampermonkey.net/
@@ -76,7 +76,7 @@
         const tasksByJob = Object.groupBy(tasks, item => item.parentId);
 
         for (const job of build.jobs) {
-            if (job.name.endsWith("_AgentRolloutJob")) {
+            if (job.id in tasksByJob) {
                 const stageDiv = document.getElementById(job.stageId);
                 const stageExpandButton = stageDiv.querySelector('.stageExpandButton');
 
